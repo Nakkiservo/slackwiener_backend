@@ -13,6 +13,7 @@ var config *AppConfig
 type AppConfig struct {
   ListenAddress string
   ListenPort    int
+  SlackToken    string
 }
 
 

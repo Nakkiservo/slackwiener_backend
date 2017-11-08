@@ -1,4 +1,4 @@
-package slack_events
+package events
 
 
 type SlackEvent struct {
@@ -10,5 +10,5 @@ type SlackEvent struct {
   EventID         string    `json:"event_id"`
   EventTime       int       `json:"event_time"`
   Challenge       string    `json:"challenge"` // only here for the handshake
-  Event           interface{} `json:"-"`
+  Event           map[string]interface{} `json:"event"`
 }

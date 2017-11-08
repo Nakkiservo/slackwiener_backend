@@ -4,11 +4,18 @@ import (
   //  "bitbucket.org/ncolabs/slackwiener_backend/config" :: todo: include for comparing with the slack token
   "bitbucket.org/ncolabs/slackwiener_backend/logging"
   "bitbucket.org/ncolabs/slackwiener_backend/utils"
-  "bitbucket.org/ncolabs/slackwiener_backend/slack_events"
+  slackEvents "bitbucket.org/ncolabs/slackwiener_backend/slack_api/events"
   "encoding/json"
   "net/http"
 )
 
+
+// Used to parse the inner even type. TODO: move somewhere sensible
+type SlackInnerEventTypeWrapper struct {
+  Type      string `json:"type"`
+}
+
+// We just wrap the challenge resonse here. TODO: move somewhere sensible
 type SlackChallenge struct {
   Challenge   string `json:"challenge"`
 }
@@ -28,7 +35,7 @@ func Assets(params map[string]string, w http.ResponseWriter, r *http.Request) {
 func Events(params map[string]string, w http.ResponseWriter, r *http.Request) {
 //  conf := config.GetAppConfiguration()
   //slackToken :=  conf.SlackToken :: todo: compare token to request token
-  var event *slack_events.SlackEvent
+  var event *slackEvents.SlackEvent
 
 
   if err := json.NewDecoder(r.Body).Decode(&event); err != nil {
@@ -48,7 +55,8 @@ func Events(params map[string]string, w http.ResponseWriter, r *http.Request) {
     w.Header().Add("Content-Type", "application/json")
     json.NewEncoder(w).Encode(&response)
   } else {
-    logging.Log.Debug("Other event type: " ,event)
+    logging.Log.Debug("Other event type: " ,event.Event["type"])
+    logging.Log.Debug("Parsing....")
     w.WriteHeader(http.StatusOK)
   }
 

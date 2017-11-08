@@ -1,8 +1,5 @@
 package slack_events
 
-import (
-  "encoding/json"
-)
 
 type SlackEvent struct {
   Token           string    `json:"token"`
@@ -12,5 +9,6 @@ type SlackEvent struct {
   AuthedUsers     []string  `json:"authed_users"`
   EventID         string    `json:"event_id"`
   EventTime       int       `json:"event_time"`
+  Challenge       string    `json:"challenge"` // only here for the handshake
   Event           interface{} `json:"-"`
 }

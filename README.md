@@ -1,6 +1,6 @@
 # SLACKWIENER BACKEND
 
-Slackwiener is the Nakkiservo slack backend utility server thingy thing. Yeah dog.
+Slackwiener is the Nakkiservo slack backend utility server thingy thing. Yeah dog. Also, it currently does nothing until Pelend fixes some serious bussiness.
 
 
 ## Building

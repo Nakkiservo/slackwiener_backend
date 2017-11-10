@@ -1,8 +1,8 @@
 package default_handlers
 
 import (
-  slackApi "bitbucket.org/ncolabs/slackwiener_backend/slack_api/api/types"
-  "bitbucket.org/ncolabs/slackwiener_backend/logging"
+  slackApi "github.com/nakkiservo/slackwiener_backend/slack_api/api/types"
+  "github.com/nakkiservo/slackwiener_backend/logging"
   "net/http"
   "encoding/json"
 )

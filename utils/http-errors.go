@@ -3,7 +3,7 @@ package utils
 import (
   "encoding/json"
   "net/http"
-  "bitbucket.org/ncolabs/slackwiener_backend/logging"
+  "github.com/nakkiservo/slackwiener_backend/logging"
   "fmt"
 )
 

@@ -1,7 +1,7 @@
 package dispatcher
 
 import (
-  dh "bitbucket.org/ncolabs/slackwiener_backend/slack_api/default_handlers"
+  dh "github.com/nakkiservo/slackwiener_backend/slack_api/default_handlers"
 )
 /*
 var Handlers HandlerFunctions = HandlerFunctions{

@@ -1,10 +1,10 @@
 package events
 
 import (
-  //  "bitbucket.org/ncolabs/slackwiener_backend/config" :: todo: include for comparing with the slack token
-//  "bitbucket.org/ncolabs/slackwiener_backend/logging"
- // "bitbucket.org/ncolabs/slackwiener_backend/utils"
-//  slackEvents "bitbucket.org/ncolabs/slackwiener_backend/slack_api/events"
+  //  "github.com/nakkiservo/slackwiener_backend/config" :: todo: include for comparing with the slack token
+//  "github.com/nakkiservo/slackwiener_backend/logging"
+ // "github.com/nakkiservo/slackwiener_backend/utils"
+//  slackEvents "github.com/nakkiservo/slackwiener_backend/slack_api/events"
   //"encoding/json"
   "net/http"
 )

@@ -2,10 +2,10 @@ package main
 
 import (
   "net/http"
-  "bitbucket.org/ncolabs/slackwiener_backend/logging"
-  "bitbucket.org/ncolabs/slackwiener_backend/config"
-  "bitbucket.org/ncolabs/slackwiener_backend/routing"
-  slackDispatcher "bitbucket.org/ncolabs/slackwiener_backend/slack_api/dispatcher"
+  "github.com/nakkiservo/slackwiener_backend/logging"
+  "github.com/nakkiservo/slackwiener_backend/config"
+  "github.com/nakkiservo/slackwiener_backend/routing"
+  slackDispatcher "github.com/nakkiservo/slackwiener_backend/slack_api/dispatcher"
   "github.com/urfave/negroni"
   "strconv"
 )

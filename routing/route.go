@@ -8,7 +8,7 @@ import (
   "net/http"
   "strings"
   "github.com/gorilla/mux"
-  "bitbucket.org/ncolabs/slackwiener_backend/logging"
+  "github.com/nakkiservo/slackwiener_backend/logging"
 )
 
 // EndpointHandlerFunc contains a specification for an Endpoint handler that provides a normal http handler callback 

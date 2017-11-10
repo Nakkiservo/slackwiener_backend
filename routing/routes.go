@@ -1,7 +1,7 @@
 package routing
 
 import (
-  "bitbucket.org/ncolabs/slackwiener_backend/controllers/events"
+  "github.com/nakkiservo/slackwiener_backend/controllers/events"
 )
 
 var Handlers HandlerFunctions = HandlerFunctions{

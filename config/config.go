@@ -2,7 +2,7 @@ package config
 
 import (
   "github.com/BurntSushi/toml"
-  "bitbucket.org/ncolabs/slackwiener_backend/logging"
+  "github.com/nakkiservo/slackwiener_backend/logging"
   "sync"
 )
 

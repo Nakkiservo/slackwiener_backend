@@ -4,8 +4,8 @@ package dispatcher
 import (
   "net/http"
   "fmt"
-  slackApi "bitbucket.org/ncolabs/slackwiener_backend/slack_api/api/types"
-  "bitbucket.org/ncolabs/slackwiener_backend/logging"
+  slackApi "github.com/nakkiservo/slackwiener_backend/slack_api/api/types"
+  "github.com/nakkiservo/slackwiener_backend/logging"
 )
 
 // SlackEventHandler describes a handler for a slack event. Function is the callback

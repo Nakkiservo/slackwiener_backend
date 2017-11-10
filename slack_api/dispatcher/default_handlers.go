@@ -11,4 +11,6 @@ var Handlers HandlerFunctions = HandlerFunctions{
 
 var DefaultHandlers SlackHandlerFunctions = SlackHandlerFunctions{
   "message": { Function: dh.DefaultMessageHandler },
+  "file_created": { Function: dh.DefaultFileCreatedHandler},
+  "file_shared": { Function: dh.DefaultFileSharedHandler},
 }

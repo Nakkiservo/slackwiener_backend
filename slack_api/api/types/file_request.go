@@ -1,10 +1,10 @@
 package types
 
 
-type FileEventResponse {
-  Ok      bool          `json:"ok"`
-  File    FileStruct    `json:"file"`
-  Error   interface{}   `json:"error"`
+type FileEventResponse struct {
+  Ok      bool              `json:"ok"`
+  File    FileEventStruct   `json:"file"`
+  Error   interface{}       `json:"error"`
 }
 
 type FileEventStruct struct {

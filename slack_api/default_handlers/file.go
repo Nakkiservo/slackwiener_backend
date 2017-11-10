@@ -8,6 +8,7 @@ import (
   "encoding/json"
 )
 
+// DefaultFileCreatedHandler is the default handler for file creation
 func DefaultFileCreatedHandler(event slackApi.SlackEvent, w http.ResponseWriter, r *http.Request) {
   logging.Log.Debug("A file was created", event)
   w.WriteHeader(http.StatusOK)
@@ -15,6 +16,7 @@ func DefaultFileCreatedHandler(event slackApi.SlackEvent, w http.ResponseWriter,
   json.NewEncoder(w).Encode("alles gut")
 }
 
+// DefaultFileSharedHandler is the default handler for file sharing events
 func DefaultFileSharedHandler(event slackApi.SlackEvent, w http.ResponseWriter, r *http.Request) {
   logging.Log.Debug("A file was shared!", event)
   w.WriteHeader(http.StatusOK)

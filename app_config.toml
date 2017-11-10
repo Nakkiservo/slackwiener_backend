@@ -1,3 +1,5 @@
 ListenAddress = "0.0.0.0"
 ListenPort    = 3000
+SlackToken    = "secret super token"
+
 

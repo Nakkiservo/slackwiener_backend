@@ -1,4 +1,4 @@
 # SLACKWIENER BACKEND
 
-Slackwiener backend captures links posted by user, normally under slack authentication, and makes them available to everyone on irssi.
+Slackwiener is the Nakkiservo slack backend utility server thingy thing. Yeah dog.
 

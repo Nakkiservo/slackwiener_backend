@@ -1,15 +1,16 @@
 // Package events provides an API similar to routing in order to connect different kinds of events their proper handlers
-package events
+package dispatcher
 
 import (
   "net/http"
   "fmt"
+  slackApi "bitbucket.org/ncolabs/slackwiener_backend/slack_api/api/types"
   "bitbucket.org/ncolabs/slackwiener_backend/logging"
 )
 
 // SlackEventHandler describes a handler for a slack event. Function is the callback
 type SlackEventHandlerFunc struct {
-  Function      func(map[string]string, http.ResponseWriter, *http.Request)
+  Function      func(slackApi.SlackEvent, http.ResponseWriter, *http.Request)
 }
 
 
@@ -30,17 +31,18 @@ func InitializeDispatcher(handlers SlackHandlerFunctions) {
 }
 
 // Dispatch tries to resolve a valid handler. It writes and closes the request if possible, or returns a JSON encoded error if none found
-func Dispatch(eventType string, params map[string]string, w http.ResponseWriter, r *http.Request) error {
+func Dispatch(eventType string, event slackApi.SlackEvent, w http.ResponseWriter, r *http.Request) error {
   if dp == nil {
     return fmt.Errorf("Dispatcher not initialized")
   }
 
   if handler, ok := dp.Handlers[eventType]; ok {
     logging.Log.Debugf("Invoking handler for type: %s", eventType)
-    handler.Function(params, w, r)
+    handler.Function(event, w, r)
   } else {
     return fmt.Errorf("Unable to find handler for even type %s", eventType)
   }
 
   return nil
 }
+

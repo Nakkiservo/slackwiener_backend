@@ -5,7 +5,7 @@ import (
   "bitbucket.org/ncolabs/slackwiener_backend/logging"
   "bitbucket.org/ncolabs/slackwiener_backend/config"
   "bitbucket.org/ncolabs/slackwiener_backend/routing"
-  "bitbucket.org/ncolabs/slackwiener_backend/events"
+  slackDispatcher "bitbucket.org/ncolabs/slackwiener_backend/slack_api/dispatcher"
   "github.com/urfave/negroni"
   "strconv"
 )
@@ -23,7 +23,7 @@ func main() {
 
   r := routing.CreateRouter(routing.Routes, routing.Handlers)
 
-  events.InitializeDispatcher(event.DefaultHandlers)
+  slackDispatcher.InitializeDispatcher(slackDispatcher.DefaultHandlers)
 
   n := negroni.Classic() // Includes some default middlewares
   n.UseHandler(r)

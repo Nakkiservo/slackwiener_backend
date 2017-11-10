@@ -4,7 +4,8 @@ import (
   //  "bitbucket.org/ncolabs/slackwiener_backend/config" :: todo: include for comparing with the slack token
   "bitbucket.org/ncolabs/slackwiener_backend/logging"
   "bitbucket.org/ncolabs/slackwiener_backend/utils"
-  slackEvents "bitbucket.org/ncolabs/slackwiener_backend/slack_api/events"
+  slackDispatcher "bitbucket.org/ncolabs/slackwiener_backend/slack_api/dispatcher"
+  slackApi "bitbucket.org/ncolabs/slackwiener_backend/slack_api/api/types"
   "encoding/json"
   "net/http"
 )
@@ -24,7 +25,7 @@ func Assets(params map[string]string, w http.ResponseWriter, r *http.Request) {
 func Events(params map[string]string, w http.ResponseWriter, r *http.Request) {
   //  conf := config.GetAppConfiguration()
   //slackToken :=  conf.SlackToken :: todo: compare token to request token
-  var event *slackEvents.SlackEvent
+  var event *slackApi.SlackEvent
 
 
   if err := json.NewDecoder(r.Body).Decode(&event); err != nil {
@@ -37,12 +38,12 @@ func Events(params map[string]string, w http.ResponseWriter, r *http.Request) {
   }
 
   if event.Type == "url_verification" {
-    response := &slackEvents.SlackChallenge{Challenge: event.Challenge}
+    response := &slackApi.SlackChallenge{Challenge: event.Challenge}
     w.WriteHeader(http.StatusOK)
     w.Header().Add("Content-Type", "application/json")
     json.NewEncoder(w).Encode(&response)
-  } else {
-    if dispatchError := slackEvents.Dispatch(event.Type, params,w,r); dispatchError != nil {
+  } else if event.Type == "event_callback" {
+    if dispatchError := slackDispatcher.Dispatch(event.Event["type"].(string), *event,w,r); dispatchError != nil {
       logging.Log.Errorf("Error handling event type '%s': %s", event.Type, dispatchError.Error())
       utils.SendError(w, utils.HttpError{
         Code:     http.StatusBadRequest,

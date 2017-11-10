@@ -1,13 +1,13 @@
 package types
 
 
-type FileResponse {
+type FileEventResponse {
   Ok      bool          `json:"ok"`
   File    FileStruct    `json:"file"`
   Error   interface{}   `json:"error"`
 }
 
-type FileStruct struct {
+type FileEventStruct struct {
   id            string
   timestamp     int
   name          string

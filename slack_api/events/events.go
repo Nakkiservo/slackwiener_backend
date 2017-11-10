@@ -12,3 +12,15 @@ type SlackEvent struct {
   Challenge       string    `json:"challenge"` // only here for the handshake
   Event           map[string]interface{} `json:"event"`
 }
+
+// Used to parse the inner even type. TODO: move somewhere sensible
+type SlackInnerEventTypeWrapper struct {
+  Type      string `json:"type"`
+}
+
+// We just wrap the challenge resonse here. TODO: move somewhere sensible
+type SlackChallenge struct {
+  Challenge   string `json:"challenge"`
+}
+
+

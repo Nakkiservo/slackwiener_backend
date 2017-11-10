@@ -5,7 +5,7 @@ import (
   "github.com/nakkiservo/slackwiener_backend/logging"
   "github.com/nakkiservo/slackwiener_backend/utils"
   slackDispatcher "github.com/nakkiservo/slackwiener_backend/slack_api/dispatcher"
-  slackApi "github.com/nakkiservo/slackwiener_backend/slack_api/api/types"
+  slackApi "github.com/nakkiservo/slackwiener_backend/slack_api/types"
   "encoding/json"
   "net/http"
 )

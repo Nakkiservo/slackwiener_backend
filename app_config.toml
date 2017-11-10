@@ -1,5 +1,5 @@
 ListenAddress = "0.0.0.0"
 ListenPort    = 3000
-SlackToken    = "secret super token"
+SlackToken    = "xoxp-176693001541-180324232786-269422334421-90d1878b9914d9cf93f1bf467a1a1cbf"
 
 

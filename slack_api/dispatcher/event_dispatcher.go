@@ -4,7 +4,7 @@ package dispatcher
 import (
   "net/http"
   "fmt"
-  slackApi "github.com/nakkiservo/slackwiener_backend/slack_api/api/types"
+  slackApi "github.com/nakkiservo/slackwiener_backend/slack_api/types"
   "github.com/nakkiservo/slackwiener_backend/logging"
 )
 

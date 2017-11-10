@@ -2,12 +2,13 @@ package types
 
 
 // Wraps the slack files.info response to reponse status and file object
-type FileResponseWrapper {
+type FileResponseWrapper struct {
   ApiRequestResponse
   SlackFileInfo
 }
 
 // Slack file.info object, refer to the documentation
+// Note: this is not the FULL file object implementation
 type SlackFileInfo struct {
   Id                  string  `json:"id"`
   Timestamp           int     `json:"timestamp"`

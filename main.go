@@ -5,6 +5,7 @@ import (
   "github.com/nakkiservo/slackwiener_backend/logging"
   "github.com/nakkiservo/slackwiener_backend/config"
   "github.com/nakkiservo/slackwiener_backend/routing"
+  "github.com/nakkiservo/slackwiener_backend/db"
   slackDispatcher "github.com/nakkiservo/slackwiener_backend/slack_api/dispatcher"
   slackAPI "github.com/nakkiservo/slackwiener_backend/slack_api/api"
   "github.com/urfave/negroni"
@@ -27,6 +28,8 @@ func main() {
   api := slackAPI.Initialize(conf.SlackToken)
 
   slackDispatcher.InitializeDispatcher(slackDispatcher.DefaultHandlers, api)
+
+  db.Initialize() // Initialize db
 
   n := negroni.Classic() // Includes some default middlewares
   n.UseHandler(r)

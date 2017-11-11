@@ -11,7 +11,8 @@ type SlackApiConfig struct {
 
 // There must exist a more sensible way to do this, but i'm just doing this because it's friday
 type SlackFilesAPIWrapper struct {
-  Info func(string) (apiTypes.SlackFileInfo, error)
+  Info            func(string) (apiTypes.SlackFileInfo, error)
+  GetPublicLink   func(string) (apiTypes.SlackFileInfo, error)
 }
 
 type SlackAPI struct {
@@ -28,6 +29,9 @@ func Initialize(token string) *SlackAPI {
   api.File = SlackFilesAPIWrapper{
     Info: func(file_id string) (apiTypes.SlackFileInfo, error) {
       return GetFileInfo(api.Config.Authorization, file_id)
+    },
+    GetPublicLink: func(file_id string) (apiTypes.SlackFileInfo, error) {
+      return GetFilePublicLink(api.Config.Authorization, file_id)
     },
   }
 

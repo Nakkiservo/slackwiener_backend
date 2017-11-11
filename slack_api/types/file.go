@@ -27,6 +27,8 @@ type SlackFileInfo struct {
   UrlDownload         string  `json:"url_download"`
   UrlPrivate          string  `json:"url_private"`
   UrlPrivateDownload  string  `json:"url_private_download"`
+  Permalink           string  `json:"permalink"`
+  PermalinkPublic     string  `json:"permalink_public"`
   IsPublic            bool    `json:"is_public"`
   PublicURLShared     bool    `json:"public_url_shared"`
 }

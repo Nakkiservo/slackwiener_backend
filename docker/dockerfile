@@ -7,8 +7,10 @@ RUN go get github.com/nakkiservo/slackwiener_backend
 WORKDIR /go/src/github.com/nakkiservo/slackwiener_backend
 RUN go get ./
 RUN make
-ADD ./app_config.toml ./build
+ADD app_config.toml ./build
 
+WORKDIR ./build
 EXPOSE 3000
 
-ENTRYPOINT ["/go/src/github.com/nakkiservo/slackwiener_backend/build/server"]
+
+ENTRYPOINT ["./server"]

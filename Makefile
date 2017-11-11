@@ -19,3 +19,4 @@ build/server: $(SRC)
 build/app_config.toml: app_config.toml
 	@cp app_config.toml ./build/
 
+

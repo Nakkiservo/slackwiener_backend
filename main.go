@@ -6,6 +6,7 @@ import (
   "github.com/nakkiservo/slackwiener_backend/config"
   "github.com/nakkiservo/slackwiener_backend/routing"
   slackDispatcher "github.com/nakkiservo/slackwiener_backend/slack_api/dispatcher"
+  slackAPI "github.com/nakkiservo/slackwiener_backend/slack_api/api"
   "github.com/urfave/negroni"
   "strconv"
 )
@@ -22,6 +23,8 @@ func main() {
   logging.Log.Debug("Configuring routes")
 
   r := routing.CreateRouter(routing.Routes, routing.Handlers)
+
+  api := slackAPI.Initialize(conf.SlackToken)
 
   slackDispatcher.InitializeDispatcher(slackDispatcher.DefaultHandlers)
 

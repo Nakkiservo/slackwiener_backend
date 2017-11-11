@@ -11,7 +11,7 @@ import (
 
 // SlackEventHandler describes a handler for a slack event. Function is the callback
 type SlackEventHandlerFunc struct {
-  Function      func(slackApi.SlackAPI, slackTypes.SlackEvent, http.ResponseWriter, *http.Request)
+  Function      func(*slackApi.SlackAPI, slackTypes.SlackEvent, http.ResponseWriter, *http.Request)
 }
 
 

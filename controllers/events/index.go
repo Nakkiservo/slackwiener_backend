@@ -28,6 +28,8 @@ func Events(params map[string]string, w http.ResponseWriter, r *http.Request) {
   var event *slackApi.SlackEvent
 
 
+  logging.Log.Info("Action at events controller")
+
   if err := json.NewDecoder(r.Body).Decode(&event); err != nil {
     logging.Log.Errorf("Unable to decode Slack request header: %s", err.Error())
     utils.SendError(w, utils.HttpError{

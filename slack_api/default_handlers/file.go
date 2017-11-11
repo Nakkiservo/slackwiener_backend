@@ -1,4 +1,3 @@
-
 package default_handlers
 
 import (
@@ -23,4 +22,13 @@ func DefaultFileSharedHandler(api *slackApi.SlackAPI, event slackTypes.SlackEven
   w.WriteHeader(http.StatusOK)
   w.Header().Add("Content-Type", "application/json")
   json.NewEncoder(w).Encode("alles gut")
+
+  logging.Log.Debug("Trying to get file info")
+
+  info, err := api.File.Info(event.Event["file_id"].(string))
+  if err != nil {
+    logging.Log.Error("Unable to get file info")
+  } else {
+    logging.Log.Info("Definitely got a file info:", info)
+  }
 }

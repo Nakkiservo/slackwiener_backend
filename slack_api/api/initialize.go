@@ -25,13 +25,11 @@ func Initialize(token string) *SlackAPI {
     File:   SlackFilesAPIWrapper{},
   }
 
-  /*
   api.File = SlackFilesAPIWrapper{
     Info: func(file_id string) (apiTypes.SlackFileInfo, error) {
       return GetFileInfo(api.Config.Authorization, file_id)
     },
   }
-  */
 
   // Wrap files api callbacks
 

@@ -26,7 +26,7 @@ func main() {
 
   api := slackAPI.Initialize(conf.SlackToken)
 
-  slackDispatcher.InitializeDispatcher(slackDispatcher.DefaultHandlers)
+  slackDispatcher.InitializeDispatcher(slackDispatcher.DefaultHandlers, api)
 
   n := negroni.Classic() // Includes some default middlewares
   n.UseHandler(r)

@@ -1,0 +1,15 @@
+FROM golang
+LABEL maintainer="Pelend @ #nakkiservo"
+LABEL description="SlackWiener backend"
+
+
+RUN go get github.com/nakkiservo/slackwiener_backend
+WORKDIR /go/src/github.com/nakkiservo/slackwiener_backend
+RUN go get ./
+RUN make
+COPY app_config.toml ./build
+
+EXPOSE 3000
+
+ENTRYPOINT ["./build/server"]
+

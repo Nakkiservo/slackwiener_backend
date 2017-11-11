@@ -1,7 +1,8 @@
 # SLACKWIENER BACKEND
 
-Slackwiener is the Nakkiservo slack backend utility server thingy thing. Yeah dog. Also, it currently does nothing until Pelend fixes some serious bussiness.
+Slackwiener is the Nakkiservo slack backend utility server thingy thing. Yeah dog. 
 
+Currently it just makes the files permalink_public available via slack api whenever a file is created.
 
 ## Building
 

@@ -8,8 +8,6 @@ WORKDIR /go/src/github.com/nakkiservo/slackwiener_backend
 RUN go get ./
 RUN make
 ADD app_config.toml ./build
-ADD ../server.crt ./build
-ADD ../server.key ./build
 
 WORKDIR ./build
 EXPOSE 3000

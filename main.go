@@ -40,9 +40,15 @@ func main() {
   }
 
   logging.Log.Info("Starting server")
-   if err := srv.ListenAndServeTLS("server.crt", "server.key"); err != nil {
+   if err := server.ListenAndServe(); err != nil {
+    logging.Log.Criticalf("Error creating the server: %s", err.Error())
+   }
+  /*
+  logging.Log.Info("Starting server")
+   if err := server.ListenAndServeTLS("server.crt", "server.key"); err != nil {
     logging.Log.Criticalf("Error creating the server: %s", err.Error())
    }
 
+   */
   logging.Log.Infof("Started server at port %d", conf.ListenPort)
 }

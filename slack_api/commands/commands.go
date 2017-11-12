@@ -1,3 +1,4 @@
+// package Commands adds Slack slash-command payload parsing and required types
 package commands
 
 

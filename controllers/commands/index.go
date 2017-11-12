@@ -8,6 +8,7 @@ import (
   "github.com/nakkiservo/slackwiener_backend/slack_api/commands"
 )
 
+
 // Index greps the command name and dispatches things
 func Index(params map[string]string, w http.ResponseWriter, r *http.Request) {
   logging.Log.Debug("Action at commands controller index: ", params)

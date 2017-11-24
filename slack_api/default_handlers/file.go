@@ -39,10 +39,12 @@ func DefaultFileSharedHandler(api *slackApi.SlackAPI, event slackTypes.SlackEven
       PublicURL: info.PermalinkPublic,
     }
 
+    /* Not needed since we don't really need slackwiener to get any info anymore, due to the fact that just setting the link public works just as well
     if dbErr := db.CreateLink(&entry); err != nil {
       logging.Log.Debugf("Unable to create link entry: %s", dbErr.Error())
     } else {
       logging.Log.Infof("Created a public link entry %s -> %s", entry.PrivateURL, entry.PublicURL)
     }
+    */
   }
 }

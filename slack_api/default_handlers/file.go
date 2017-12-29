@@ -1,7 +1,6 @@
 package default_handlers
 
 import (
-  "github.com/nakkiservo/slackwiener_backend/db"
   slackTypes "github.com/nakkiservo/slackwiener_backend/slack_api/types"
   slackApi "github.com/nakkiservo/slackwiener_backend/slack_api/api"
   "github.com/nakkiservo/slackwiener_backend/logging"
@@ -33,11 +32,13 @@ func DefaultFileSharedHandler(api *slackApi.SlackAPI, event slackTypes.SlackEven
   } else {
     logging.Log.Infof("Creating a public link entry for file %s", event.Event["file_id"].(string), info)
     logging.Log.Debug(event.Event)
+    /*
     entry := db.SlackFileLink{
       FileId: event.Event["file_id"].(string),
       PrivateURL: info.Permalink,
       PublicURL: info.PermalinkPublic,
     }
+    */
 
     /* Not needed since we don't really need slackwiener to get any info anymore, due to the fact that just setting the link public works just as well
     if dbErr := db.CreateLink(&entry); err != nil {

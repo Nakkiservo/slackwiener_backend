@@ -7,8 +7,12 @@ import (
   "github.com/nakkiservo/slackwiener_backend/logging"
   "github.com/nakkiservo/slackwiener_backend/slack_api/commands"
   "encoding/json"
+  "time"
+  "math/rand"
+  "fmt"
 )
 
+var source *rand.Rand
 
 // Index greps the command name and dispatches things
 func Index(params map[string]string, w http.ResponseWriter, r *http.Request) {
@@ -77,6 +81,11 @@ func HandleTestInChannelCommand(cmd *commands.SlackCommandPayload, w http.Respon
 }
 
 func HandleDiceCommand(cmd *commands.SlackCommandPayload, w http.ResponseWriter) {
+  if source == nil {
+    source = rand.New(rand.NewSource(time.Now().UTC().UnixNano()))
+  }
+
+
   w.Header().Set("Content-Type", "application/json")
   payload := make(map[string]interface{})
 
@@ -84,7 +93,8 @@ func HandleDiceCommand(cmd *commands.SlackCommandPayload, w http.ResponseWriter)
   payload["response_type"] = "in_channel"
 
 
-  payloadText := "The completely random and fair result is: 4 (chosen fairly with a dice roll)"
+  result := 1 + source.Intn(5)
+  payloadText := fmt.Sprintf("The completely random and fair result is: %d", result)
 
   payload["attachments"] = []map[string]string{
     {

@@ -77,6 +77,7 @@ func HandleTestInChannelCommand(cmd *commands.SlackCommandPayload, w http.Respon
 }
 
 func HandleDiceCommand(cmd *commands.SlackCommandPayload, w http.ResponseWriter) {
+  w.Header().Set("Content-Type", "application/json")
   payload := make(map[string]interface{})
 
   payload["text"] = cmd.UserName + " rolls a dice."

@@ -1,6 +1,3 @@
-// SlackWiener backend routing package
-// Author: Teemu Poikkijoki <poidokoff@gmail.com>
-
 // package routing provides routing utilities for slackwiener backend
 package routing
 

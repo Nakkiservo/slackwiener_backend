@@ -14,7 +14,6 @@ import (
 func Index(params map[string]string, w http.ResponseWriter, r *http.Request) {
   logging.Log.Debug("Action at commands controller index: ", params)
 
-
   cmd, err := commands.DecodeCommandPayload(r)
 
   if err != nil {
@@ -28,6 +27,8 @@ func Index(params map[string]string, w http.ResponseWriter, r *http.Request) {
       HandleTestCommand(cmd, w)
     case "/testinchannel":
       HandleTestInChannelCommand(cmd,w)
+    case "/noppa":
+      HandleDiceCommand(cmd, w)
     default:
       logging.Log.Debugf("Token: %s, Command: %s, Text: %s", cmd.Token, cmd.Command, cmd.Text)
   }
@@ -75,4 +76,22 @@ func HandleTestInChannelCommand(cmd *commands.SlackCommandPayload, w http.Respon
   json.NewEncoder(w).Encode(&payload)
 }
 
+func HandleDiceCommand(cmd *commands.SlackCommandPayload, w http.ResponseWriter) {
+  payload := make(map[string]interface{})
+
+  payload["text"] = cmd.UserName + " rolls a dice."
+  payload["response_type"] = "in_channel"
+
+
+  payloadText := "The completely random and fair result is: 4 (chosen fairly with a dice roll)"
+
+  payload["attachments"] = []map[string]string{
+    {
+     "text": payloadText,
+    },
+  }
+
+  json.NewEncoder(w).Encode(&payload)
+
+}
 

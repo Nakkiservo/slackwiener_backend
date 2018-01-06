@@ -27,16 +27,16 @@ func Index(params map[string]string, w http.ResponseWriter, r *http.Request) {
   }
 
   switch(cmd.Command) {
-    case "/testcommand":
-      HandleTestCommand(cmd, w)
-    case "/testinchannel":
-      HandleTestInChannelCommand(cmd,w)
-    case "/noppa":
-      HandleDiceCommand(cmd, w)
-    case "/darra":
-      HandleDarra(cmd, w)
-    default:
-      logging.Log.Debugf("Token: %s, Command: %s, Text: %s", cmd.Token, cmd.Command, cmd.Text)
+  case "/testcommand":
+    HandleTestCommand(cmd, w)
+  case "/testinchannel":
+    HandleTestInChannelCommand(cmd,w)
+  case "/noppa":
+    HandleDiceCommand(cmd, w)
+  case "/darra":
+    HandleDarra(cmd, w)
+  default:
+    logging.Log.Debugf("Token: %s, Command: %s, Text: %s", cmd.Token, cmd.Command, cmd.Text)
   }
 }
 
@@ -49,7 +49,7 @@ func HandleTestCommand(cmd *commands.SlackCommandPayload, w http.ResponseWriter)
   payload["text"] = "You have invoked the TESTCOMMAND! OH NOES!"
   payload["attachments"] = []map[string]string{
     {
-     "text": "Your arguments were: " + cmd.Text,
+      "text": "Your arguments were: " + cmd.Text,
     },
   }
 
@@ -68,14 +68,14 @@ func HandleTestInChannelCommand(cmd *commands.SlackCommandPayload, w http.Respon
   var payloadText string
 
   if cmd.Text == "" {
-      payloadText = "The bastard gave no arguments either. :("
+    payloadText = "The bastard gave no arguments either. :("
   } else {
-      payloadText = "They thought the following arguments would do something: " + cmd.Text
+    payloadText = "They thought the following arguments would do something: " + cmd.Text
   }
 
   payload["attachments"] = []map[string]string{
     {
-     "text": payloadText,
+      "text": payloadText,
     },
   }
 
@@ -100,7 +100,7 @@ func HandleDiceCommand(cmd *commands.SlackCommandPayload, w http.ResponseWriter)
 
   payload["attachments"] = []map[string]string{
     {
-     "text": payloadText,
+      "text": payloadText,
     },
   }
 
@@ -110,11 +110,26 @@ func HandleDiceCommand(cmd *commands.SlackCommandPayload, w http.ResponseWriter)
 
 
 func HandleDarra(cmd *commands.SlackCommandPayload, w http.ResponseWriter) {
+
   w.Header().Set("Content-Type", "application/json");
 
   payload := make(map[string]interface{})
   payload["text"] = cmd.UserName + " has a head-splitting darra"
   payload["response_type"] = "in_channel"
+
+  if cmd.Text != "" {
+    var payloadText string
+
+    if cmd.Text == "sherry" {
+      payloadText = "It is the fearsome SHERRYDARRA";
+
+      payload["attachments"] = []map[string]string{
+        {
+          "text": payloadText,
+        },
+      }
+    }
+  }
 
   json.NewEncoder(w).Encode(&payload)
 

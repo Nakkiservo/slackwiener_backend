@@ -33,6 +33,8 @@ func Index(params map[string]string, w http.ResponseWriter, r *http.Request) {
       HandleTestInChannelCommand(cmd,w)
     case "/noppa":
       HandleDiceCommand(cmd, w)
+    case "/darra":
+      HandleDarra(cmd, w)
     default:
       logging.Log.Debugf("Token: %s, Command: %s, Text: %s", cmd.Token, cmd.Command, cmd.Text)
   }
@@ -101,6 +103,18 @@ func HandleDiceCommand(cmd *commands.SlackCommandPayload, w http.ResponseWriter)
      "text": payloadText,
     },
   }
+
+  json.NewEncoder(w).Encode(&payload)
+
+}
+
+
+func HandleDarra(cmd *commands.SlackCommandPayload, w http.ResponseWriter) {
+  w.Header().Set("Content-Type", "application/json");
+
+  payload := make(map[string]interface{})
+  payload["text"] = cmd.UserName + " has a head-splitting darra"
+  payload["response_type"] = "in_channel"
 
   json.NewEncoder(w).Encode(&payload)
 

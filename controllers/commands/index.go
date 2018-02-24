@@ -10,6 +10,8 @@ import (
   "time"
   "math/rand"
   "fmt"
+  "regexp"
+  "strconv"
 )
 
 var source *rand.Rand
@@ -91,12 +93,20 @@ func HandleDiceCommand(cmd *commands.SlackCommandPayload, w http.ResponseWriter)
   w.Header().Set("Content-Type", "application/json")
   payload := make(map[string]interface{})
 
-  payload["text"] = cmd.UserName + " rolls a dice."
-  payload["response_type"] = "in_channel"
+  dRe := regexp.MustCompile("(\\d+)?d(\\d+)")
 
+  payload["text"] = cmd.UserName + " rolls " + cmd.Text + "."
+   payload["response_type"] = "in_channel"
 
-  result := 1 + source.Intn(5)
-  payloadText := fmt.Sprintf("The completely random and fair result is: %d", result)
+  result := RollDice(cmd.Text)
+
+  var payloadText string
+
+  if dRe.MatchString(cmd.Text) {
+    payloadText = fmt.Sprintf("The completely random and fair result is: %d", result)
+  } else {
+    payloadText = "But we all know it's a bogus dice roll and now laugh at their miserable attempt."
+  }
 
   payload["attachments"] = []map[string]string{
     {
@@ -133,5 +143,47 @@ func HandleDarra(cmd *commands.SlackCommandPayload, w http.ResponseWriter) {
 
   json.NewEncoder(w).Encode(&payload)
 
+}
+
+func RollDice(dice string) int {
+  dRe := regexp.MustCompile("(\\d+)?d(\\d+)")
+
+  // 
+  if dice != "" && dRe.MatchString(dice) {
+    m := dRe.FindStringSubmatch(dice)
+
+    times := 1
+    var d int
+
+    if m[1] != "" {
+      tmp, err := strconv.Atoi(m[1])
+
+      if err == nil {
+        times = tmp
+      }
+
+    }
+
+    d, err := strconv.Atoi(m[2])
+
+    if err != nil {
+      d = 6
+    }
+
+    if d <= 1 {
+      d = 2
+    }
+
+    sum := 0
+
+    for i := 0; i < times; i++ {
+      sum += 1 + source.Intn(d - 1)
+    }
+
+    return sum
+  }
+
+  // we default to 1d6
+  return 1 + source.Intn(5)
 }
 

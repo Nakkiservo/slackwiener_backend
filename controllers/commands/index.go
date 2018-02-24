@@ -95,17 +95,17 @@ func HandleDiceCommand(cmd *commands.SlackCommandPayload, w http.ResponseWriter)
 
   dRe := regexp.MustCompile("(\\d+)?d(\\d+)")
 
-  payload["text"] = cmd.UserName + " rolls " + cmd.Text + "."
-   payload["response_type"] = "in_channel"
 
   result := RollDice(cmd.Text)
 
   var payloadText string
 
   if dRe.MatchString(cmd.Text) {
+    payload["text"] = cmd.UserName + " rolls " + cmd.Text + "."
     payloadText = fmt.Sprintf("The completely random and fair result is: %d", result)
+    payload["response_type"] = "in_channel"
   } else {
-    payloadText = "But we all know it's a bogus dice roll and now laugh at their miserable attempt."
+    payloadText = "Invalid dice roll"
   }
 
   payload["attachments"] = []map[string]string{
